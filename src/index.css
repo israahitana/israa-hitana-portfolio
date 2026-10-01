@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: #FAF8F5;
+    color: #1A1713;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom Warm Scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #F5F1E9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #C4AB9B;
+    border-radius: 9999px;
+    border: 2px solid #F5F1E9;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #A78A77;
+  }
+
+  /* Accessible focus visible */
+  :focus-visible {
+    outline: 2px solid #896C59;
+    outline-offset: 3px;
+  }
+}
+
+@layer utilities {
+  /* Subtle glassmorphism with warm blur */
+  .glass-card {
+    background: rgba(250, 248, 245, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border: 1px solid rgba(223, 213, 199, 0.65);
+  }
+
+  .glass-card-hover {
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .glass-card-hover:hover {
+    background: rgba(255, 255, 255, 0.92);
+    border-color: rgba(167, 138, 119, 0.5);
+    box-shadow: 0 16px 36px -10px rgba(64, 46, 36, 0.09), 0 0 20px -4px rgba(137, 108, 89, 0.12);
+    transform: translateY(-4px);
+  }
+
+  .glass-nav {
+    background: rgba(250, 248, 245, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(223, 213, 199, 0.55);
+  }
+
+  .glass-nav-scrolled {
+    background: rgba(245, 241, 233, 0.92);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 4px 24px -2px rgba(64, 46, 36, 0.05);
+    border-bottom: 1px solid rgba(201, 186, 166, 0.6);
+  }
+
+  /* Subtle ambient gradients */
+  .bg-warm-radial {
+    background-image: 
+      radial-gradient(circle at 10% 20%, rgba(220, 202, 190, 0.35) 0%, transparent 40%),
+      radial-gradient(circle at 90% 30%, rgba(235, 227, 214, 0.5) 0%, transparent 45%),
+      radial-gradient(circle at 50% 80%, rgba(196, 171, 155, 0.25) 0%, transparent 50%);
+  }
+
+  .subtle-dot-pattern {
+    background-image: radial-gradient(rgba(142, 124, 102, 0.12) 1px, transparent 1px);
+    background-size: 24px 24px;
+  }
+}
+
+/* Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

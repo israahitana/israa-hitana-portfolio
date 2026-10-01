@@ -1,0 +1,370 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { 
+  Mail, 
+  MapPin, 
+  Send, 
+  CheckCircle, 
+  AlertCircle, 
+  Copy, 
+  Check, 
+  ArrowUpRight,
+  Clock,
+  Sparkles
+} from 'lucide-react';
+import { Github, Linkedin } from '../UI/Icons';
+import { profileData } from '../../data/profile';
+import { SectionHeading } from '../UI/SectionHeading';
+import { Button } from '../UI/Button';
+
+export const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    subject: '',
+    message: '',
+  });
+
+  const [status, setStatus] = useState({
+    submitting: false,
+    submitted: false,
+    error: null,
+  });
+
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(profileData.socialLinks.email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Simple validation
+    if (!formData.name || !formData.email || !formData.message) {
+      setStatus({
+        submitting: false,
+        submitted: false,
+        error: 'Veuillez renseigner tous les champs obligatoires.',
+      });
+      return;
+    }
+
+    setStatus({ submitting: true, submitted: false, error: null });
+
+    const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT;
+
+    if (endpoint) {
+      try {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Accept: 'application/json',
+          },
+          body: JSON.stringify({
+            name: formData.name,
+            email: formData.email,
+            subject: formData.subject || 'Nouveau message depuis le portfolio',
+            message: formData.message,
+          }),
+        });
+
+        if (response.ok) {
+          setStatus({ submitting: false, submitted: true, error: null });
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        } else {
+          throw new Error("Erreur lors de l'envoi du message.");
+        }
+      } catch (err) {
+        setStatus({
+          submitting: false,
+          submitted: false,
+          error: "Une erreur est survenue lors de l'envoi. Vous pouvez également m'envoyer un email directement.",
+        });
+      }
+    } else {
+      // Si aucun endpoint externe n'est encore configuré dans .env,
+      // on prépare un mailto pré-rempli et on affiche le retour positif immédiat
+      setTimeout(() => {
+        const mailtoUrl = `mailto:${profileData.socialLinks.email}?subject=${encodeURIComponent(
+          formData.subject || 'Prise de contact - Portfolio'
+        )}&body=${encodeURIComponent(
+          `Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+        )}`;
+        
+        window.open(mailtoUrl, '_blank');
+
+        setStatus({
+          submitting: false,
+          submitted: true,
+          error: null,
+        });
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      }, 600);
+    }
+  };
+
+  return (
+    <section id="contact" className="py-20 md:py-28 relative overflow-hidden bg-cream-100/50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <SectionHeading
+          badge="Contact & Opportunités"
+          title="Échangeons sur votre projet ou votre opportunité de stage"
+          subtitle="Ouverte aux opportunités de stage PFE en Tunisie, en France et à l'international, ainsi qu'aux discussions techniques et collaborations logicielles."
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+          
+          {/* Left Column: Direct coordinates & PFE Status */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6 }}
+            className="lg:col-span-5 space-y-6"
+          >
+            {/* Quick Status Card */}
+            <div className="glass-card rounded-2xl p-6 border border-taupe-200 shadow-soft">
+              <div className="flex items-center gap-2.5 text-xs font-bold text-mocha-800 uppercase tracking-wider mb-2">
+                <Sparkles className="w-4 h-4 text-mocha-600" />
+                <span>Disponibilité PFE Immédiate</span>
+              </div>
+              <h3 className="text-xl font-bold text-charcoal-900">
+                Prête pour de nouveaux défis logiciels
+              </h3>
+              <p className="mt-2 text-xs sm:text-sm text-charcoal-600 leading-relaxed">
+                Je suis joignable pour convenir d'un entretien technique, présenter mes réalisations et discuter des missions que nous pourrions accomplir ensemble.
+              </p>
+
+              <div className="mt-4 pt-4 border-t border-taupe-200/80 flex items-center gap-2 text-xs text-charcoal-500">
+                <Clock className="w-4 h-4 text-mocha-600" />
+                <span>Réponse garantie sous 24h à 48h</span>
+              </div>
+            </div>
+
+            {/* Direct Contact Cards */}
+            <div className="space-y-3">
+              {/* Email Card with Copy button */}
+              <div className="glass-card rounded-xl p-4 border border-taupe-200 shadow-xs flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-mocha-100 text-mocha-800">
+                    <Mail className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">Email</span>
+                    <p className="text-sm font-semibold text-charcoal-900 break-all">
+                      {profileData.socialLinks.email}
+                    </p>
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  className="p-2 rounded-lg bg-taupe-100 hover:bg-taupe-200 text-charcoal-700 transition-colors shrink-0"
+                  title="Copier l'adresse email"
+                >
+                  {copied ? <Check className="w-4 h-4 text-emerald-600" /> : <Copy className="w-4 h-4" />}
+                </button>
+              </div>
+
+              {/* LinkedIn Card */}
+              <a
+                href={profileData.socialLinks.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card rounded-xl p-4 border border-taupe-200 shadow-xs flex items-center justify-between group hover:border-mocha-300 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-mocha-100 text-mocha-800 group-hover:bg-mocha-600 group-hover:text-cream-50 transition-colors">
+                    <Linkedin className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">LinkedIn</span>
+                    <p className="text-sm font-semibold text-charcoal-900 group-hover:text-mocha-800 transition-colors">
+                      in/israahitana
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-charcoal-400 group-hover:text-mocha-700 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              {/* GitHub Card */}
+              <a
+                href={profileData.socialLinks.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="glass-card rounded-xl p-4 border border-taupe-200 shadow-xs flex items-center justify-between group hover:border-mocha-300 transition-all"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="p-2.5 rounded-lg bg-mocha-100 text-mocha-800 group-hover:bg-mocha-600 group-hover:text-cream-50 transition-colors">
+                    <Github className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">GitHub</span>
+                    <p className="text-sm font-semibold text-charcoal-900 group-hover:text-mocha-800 transition-colors">
+                      github.com/israahitana
+                    </p>
+                  </div>
+                </div>
+                <ArrowUpRight className="w-4 h-4 text-charcoal-400 group-hover:text-mocha-700 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+              </a>
+
+              {/* Location Card */}
+              <div className="glass-card rounded-xl p-4 border border-taupe-200 shadow-xs flex items-center gap-3">
+                <div className="p-2.5 rounded-lg bg-mocha-100 text-mocha-800">
+                  <MapPin className="w-5 h-5" />
+                </div>
+                <div>
+                  <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">Localisation</span>
+                  <p className="text-sm font-semibold text-charcoal-900">
+                    {profileData.location}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+          </motion.div>
+
+          {/* Right Column: Contact Form */}
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-50px' }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="lg:col-span-7"
+          >
+            <div className="glass-card rounded-2xl p-6 sm:p-8 border border-taupe-200 shadow-soft">
+              <h3 className="text-xl font-bold text-charcoal-900 mb-1">
+                Envoyez-moi un message
+              </h3>
+              <p className="text-xs sm:text-sm text-charcoal-600 mb-6 font-normal">
+                Remplissez ce formulaire et je prendrai contact avec vous sans délai.
+              </p>
+
+              {status.submitted && (
+                <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3">
+                  <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold">Message transmis avec succès !</h4>
+                    <p className="text-xs text-emerald-800 mt-1">
+                      Merci pour votre prise de contact. Je vous répondrai très prochainement.
+                    </p>
+                  </div>
+                </div>
+              )}
+
+              {status.error && (
+                <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3">
+                  <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="text-sm font-bold">Information</h4>
+                    <p className="text-xs text-amber-800 mt-1">{status.error}</p>
+                  </div>
+                </div>
+              )}
+
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Name Input */}
+                  <div>
+                    <label htmlFor="name" className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                      Nom complet <span className="text-mocha-600">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      placeholder="Votre nom ou entreprise"
+                      className="w-full px-4 py-2.5 rounded-xl bg-cream-50/80 border border-taupe-300 text-charcoal-900 placeholder-charcoal-400 text-sm focus:outline-none focus:border-mocha-600 focus:bg-white transition-colors"
+                    />
+                  </div>
+
+                  {/* Email Input */}
+                  <div>
+                    <label htmlFor="email" className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                      Adresse Email <span className="text-mocha-600">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      placeholder="nom@exemple.com"
+                      className="w-full px-4 py-2.5 rounded-xl bg-cream-50/80 border border-taupe-300 text-charcoal-900 placeholder-charcoal-400 text-sm focus:outline-none focus:border-mocha-600 focus:bg-white transition-colors"
+                    />
+                  </div>
+                </div>
+
+                {/* Subject Input */}
+                <div>
+                  <label htmlFor="subject" className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                    Sujet
+                  </label>
+                  <input
+                    type="text"
+                    id="subject"
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    placeholder="Proposition de Stage PFE, collaboration, projet..."
+                    className="w-full px-4 py-2.5 rounded-xl bg-cream-50/80 border border-taupe-300 text-charcoal-900 placeholder-charcoal-400 text-sm focus:outline-none focus:border-mocha-600 focus:bg-white transition-colors"
+                  />
+                </div>
+
+                {/* Message Input */}
+                <div>
+                  <label htmlFor="message" className="block text-xs font-semibold text-charcoal-700 uppercase tracking-wider mb-1.5">
+                    Message <span className="text-mocha-600">*</span>
+                  </label>
+                  <textarea
+                    id="message"
+                    name="message"
+                    rows="5"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    placeholder="Présentez brièvement vos besoins, le contexte de votre opportunité de stage ou votre projet..."
+                    className="w-full px-4 py-2.5 rounded-xl bg-cream-50/80 border border-taupe-300 text-charcoal-900 placeholder-charcoal-400 text-sm focus:outline-none focus:border-mocha-600 focus:bg-white transition-colors resize-none"
+                  ></textarea>
+                </div>
+
+                <div className="pt-2 flex items-center justify-between">
+                  <span className="text-xs text-charcoal-500 font-normal">
+                    <span className="text-mocha-600">*</span> Champs obligatoires
+                  </span>
+
+                  <Button
+                    type="submit"
+                    variant="mocha"
+                    size="md"
+                    disabled={status.submitting}
+                    icon={Send}
+                    iconPosition="right"
+                  >
+                    {status.submitting ? 'Envoi en cours...' : 'Envoyer le message'}
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </motion.div>
+
+        </div>
+
+      </div>
+    </section>
+  );
+};
