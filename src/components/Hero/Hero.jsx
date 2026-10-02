@@ -119,7 +119,7 @@ export const Hero = () => {
 
             <Button
               href={profileData.socialLinks.cvUrl}
-              target="_blank"
+              download="CV-Israa-Hitana.pdf"
               size="lg"
               variant="secondary"
               icon={Download}

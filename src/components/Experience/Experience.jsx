@@ -3,16 +3,11 @@ import { motion } from 'framer-motion';
 import { 
   GraduationCap, 
   Briefcase, 
-  Target, 
   MapPin, 
-  Calendar, 
-  CheckCircle2, 
-  ChevronRight,
-  Sparkles
+  Calendar
 } from 'lucide-react';
 import { timelineData } from '../../data/experience';
 import { SectionHeading } from '../UI/SectionHeading';
-import { Badge } from '../UI/Badge';
 
 export const Experience = () => {
   return (
@@ -20,15 +15,13 @@ export const Experience = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading
-          badge="Parcours académique & professionnel"
-          title="Formation, Expériences & Objectif PFE"
-          subtitle="Un parcours d'ingénierie rigoureux combinant fondations théoriques solides et mise en pratique sur des projets logiciels."
+          badge="Parcours"
+          title="Formation & Expériences"
         />
 
         {/* Vertical Timeline */}
         <div className="relative mt-12 pl-6 sm:pl-10 border-l-2 border-taupe-300 space-y-10">
           {timelineData.map((item, index) => {
-            const isObjective = item.type === 'objective';
             const isEducation = item.type === 'education';
 
             return (
@@ -43,16 +36,14 @@ export const Experience = () => {
                 {/* Timeline node marker */}
                 <div
                   className={`absolute -left-[31px] sm:-left-[47px] top-1.5 w-7 h-7 sm:w-8 sm:h-8 rounded-full border-4 border-cream-50 flex items-center justify-center transition-all duration-300 ${
-                    isObjective
+                    item.highlight
                       ? 'bg-mocha-700 text-cream-50 shadow-warm-glow ring-4 ring-mocha-200'
                       : isEducation
                       ? 'bg-taupe-500 text-cream-50 group-hover:bg-mocha-600'
                       : 'bg-charcoal-700 text-cream-50 group-hover:bg-mocha-700'
                   }`}
                 >
-                  {isObjective ? (
-                    <Target className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-                  ) : isEducation ? (
+                  {isEducation ? (
                     <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   ) : (
                     <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -62,7 +53,7 @@ export const Experience = () => {
                 {/* Timeline Card */}
                 <div
                   className={`rounded-2xl p-6 sm:p-7 glass-card transition-all duration-300 border ${
-                    isObjective
+                    item.highlight
                       ? 'border-mocha-300 bg-mocha-50/60 shadow-soft-lg'
                       : 'border-taupe-200 shadow-soft group-hover:border-mocha-300 group-hover:bg-white'
                   }`}
@@ -72,18 +63,12 @@ export const Experience = () => {
                     <div className="flex items-center gap-2">
                       <span
                         className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                          isObjective
-                            ? 'bg-mocha-600 text-cream-50'
-                            : isEducation
+                          isEducation
                             ? 'bg-taupe-200 text-charcoal-800'
-                            : 'bg-cream-200 text-charcoal-800'
+                            : 'bg-mocha-100 text-mocha-900 border border-mocha-200/80'
                         }`}
                       >
-                        {isObjective
-                          ? 'Cible Actuelle'
-                          : isEducation
-                          ? 'Formation Académique'
-                          : 'Expérience / Projet'}
+                        {isEducation ? 'Formation Académique' : 'Expérience / Projet'}
                       </span>
                     </div>
 

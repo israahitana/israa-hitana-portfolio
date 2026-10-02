@@ -36,7 +36,7 @@ export const Footer = () => {
               </span>
             </div>
             <p className="text-xs sm:text-sm text-taupe-300 max-w-sm">
-              {profileData.role} • Ingénierie logicielle & solutions numériques modernes (Web, Logiciel, Mobile, Data & IA).
+              {profileData.role} • Développement logiciel
             </p>
           </div>
 

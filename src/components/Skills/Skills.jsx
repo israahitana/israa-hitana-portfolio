@@ -7,11 +7,11 @@ import {
   Layers, 
   Cpu, 
   BrainCircuit, 
-  Check, 
+  Smartphone,
   Sparkles,
   ArrowRight
 } from 'lucide-react';
-import { skillCategories } from '../../data/skills';
+import { skillCategories, learningPhilosophy } from '../../data/skills';
 import { SectionHeading } from '../UI/SectionHeading';
 
 // Icon mapping helper
@@ -22,6 +22,7 @@ const iconMap = {
   Layers: Layers,
   Cpu: Cpu,
   BrainCircuit: BrainCircuit,
+  Smartphone: Smartphone,
 };
 
 export const Skills = () => {
@@ -120,7 +121,7 @@ export const Skills = () => {
           })}
         </div>
 
-        {/* Future Extensibility Note & Open Mindset */}
+        {/* Learning Philosophy Banner */}
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -130,10 +131,10 @@ export const Skills = () => {
         >
           <div className="flex items-center justify-center gap-2 text-mocha-800 text-xs font-bold uppercase tracking-wider mb-1">
             <Sparkles className="w-3.5 h-3.5 text-mocha-600" />
-            <span>Capacité d'apprentissage rapide & Veille technologique</span>
+            <span>{learningPhilosophy.title}</span>
           </div>
           <p className="text-xs sm:text-sm text-charcoal-600">
-            Cette stack évolue continuellement au fil de mes projets. Toujours prête à appréhender de nouveaux frameworks, langages (.NET, Android, Angular, Spring Boot, Big Data) et architectures selon les besoins spécifiques des missions.
+            {learningPhilosophy.text}
           </p>
         </motion.div>
 

@@ -1,50 +1,58 @@
 /**
  * Données du parcours (Formation & Expériences professionnelles / académiques)
- * Organisées de manière chronologique pour une timeline moderne.
+ * Ordre : du plus récent au plus ancien
+ * 1. Licence en Développement des Systèmes d'Information — 2024 / 2027 (en cours)
+ * 2. Stage SQLI-SERVICES — Été 2024
+ * 3. Baccalauréat — 2023 / 2024
  */
 export const timelineData = [
   {
-    id: "pfe-target",
-    type: "objective", // "objective", "education", "experience"
-    role: "Recherche de Stage PFE (Projet de Fin d'Études)",
-    institution: "Entreprises en Tunisie, France ou à l'International",
-    period: "Février / Mars 2026 — 4 à 6 mois",
-    location: "Tunisie / France / International",
-    description: "Recherche active d'une opportunité de stage de fin d'études en tant que Software Developer. Volonté d'intégrer une équipe d'ingénierie logicielle pour concevoir et développer des solutions innovantes (Web, Logiciel, Mobile, Data & IA).",
-    skills: ["Software Engineering", "Full-Stack", "Mobile", "Data & AI", "Agile"],
+    id: "licence-dsi",
+    type: "education",
+    role: "Licence en Développement des Systèmes d'Information",
+    institution: "Formation en cours",
+    period: "2024 / 2027",
+    location: "Tunisie",
+    description:
+      "Formation en cours en développement des systèmes d'information, couvrant la conception logicielle, le développement web, les bases de données, UML, l'architecture logicielle et les technologies modernes (Web, Data & IA).",
+    skills: [
+      "Développement Logiciel",
+      "Conception",
+      "UML",
+      "Bases de données",
+      "Web Development",
+      "Data & IA",
+    ],
     highlight: true,
   },
   {
-    id: "engineering-degree",
-    type: "education",
-    role: "Cycle Ingénieur en Génie Logiciel & Informatique",
-    institution: "École d'Ingénieurs",
-    period: "En cours (Dernière année / PFE)",
-    location: "Tunisie",
-    description: "Formation d'ingénieur approfondie couvrant la conception logicielle, les architectures distribuées, le développement Full-Stack, les systèmes de bases de données avancés, la conteneurisation et l'intelligence artificielle.",
-    skills: ["Architecture Logicielle", "UML & POO", "Bases de données", "Java / Spring", "React", "Python"],
-    highlight: false,
-  },
-  {
-    id: "internship-academic-exp",
+    id: "sqli-services",
     type: "experience",
-    role: "Stage / Projet d'Ingénierie Logicielle",
-    institution: "Entreprise / Laboratoire d'Ingénierie",
-    period: "Été / Session Académique",
+    role: "Stage / Développement Logiciel",
+    institution: "SQLI-SERVICES",
+    period: "Été 2024",
     location: "Tunisie",
-    description: "Participation au cycle de développement d'une solution logicielle : analyse des besoins, modélisation des processus, conception de l'architecture et implémentation de modules applicatifs.",
-    skills: ["Développement Logiciel", "Git / GitHub", "Collaboration", "Tests"],
+    description:
+      "Expérience en développement informatique au sein de SQLI-SERVICES, société spécialisée dans les solutions web et mobile, le CRM, l'ERP et la cybersécurité. Participation au développement d'une application web de gestion des tâches et mise en pratique des technologies Full-Stack.",
+    skills: [
+      "Développement Web",
+      "Full-Stack",
+      "React",
+      "Node.js",
+      "MongoDB",
+      "Git / GitHub",
+    ],
     highlight: false,
   },
   {
-    id: "preparatory-cycle",
+    id: "baccalaureat",
     type: "education",
-    role: "Cycle Préparatoire aux Études d'Ingénieurs (ou Licence)",
-    institution: "Institut Supérieur / Université",
-    period: "Parcours préparatoire",
+    role: "Baccalauréat",
+    institution: "Formation Académique",
+    period: "2023 / 2024",
     location: "Tunisie",
-    description: "Acquisition de bases solides en mathématiques appliquées, algorithmique fondamentale, structures de données, programmation procédurale et orientée objet.",
-    skills: ["Algorithmique", "Structures de données", "Mathématiques", "C / C++", "Logique formelle"],
+    description: "Baccalauréat obtenu avec la mention Assez Bien.",
+    skills: ["Baccalauréat", "Formation générale"],
     highlight: false,
   },
 ];

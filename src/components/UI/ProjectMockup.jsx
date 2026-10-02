@@ -1,5 +1,16 @@
 import React from 'react';
-import { BrainCircuit, Cpu, Layers, Layout, Terminal, Database, Code2 } from 'lucide-react';
+import { 
+  CheckCircle2, 
+  Clock, 
+  Calendar, 
+  Layers, 
+  Wrench, 
+  ShieldCheck, 
+  AlertTriangle, 
+  CheckSquare, 
+  Sparkles,
+  Code2
+} from 'lucide-react';
 
 export const ProjectMockup = ({ type = 'web', imageUrl, title }) => {
   if (imageUrl) {
@@ -16,93 +27,132 @@ export const ProjectMockup = ({ type = 'web', imageUrl, title }) => {
     );
   }
 
-  // Visual Mockups vectoriels stylisés intégrés
+  // Visual Mockups vectoriels haute fidélité intégrés
   return (
-    <div className="relative w-full h-52 sm:h-60 overflow-hidden bg-gradient-to-br from-taupe-100 via-mocha-100/50 to-cream-200 border-b border-taupe-200/70 p-4 flex flex-col justify-between group-hover:bg-gradient-to-br group-hover:from-taupe-200/70 group-hover:to-mocha-200/50 transition-colors duration-500">
+    <div className="relative w-full h-56 sm:h-64 overflow-hidden bg-gradient-to-br from-cream-100 via-taupe-100/70 to-mocha-100/60 border-b border-taupe-200/80 p-4 flex flex-col justify-between group-hover:from-taupe-100 group-hover:to-cream-200 transition-colors duration-500 select-none">
+      
       {/* Top browser/window bar */}
-      <div className="flex items-center justify-between pb-3 border-b border-taupe-300/40">
+      <div className="flex items-center justify-between pb-2.5 border-b border-taupe-200/70">
         <div className="flex items-center gap-1.5">
           <span className="w-2.5 h-2.5 rounded-full bg-mocha-400/60"></span>
           <span className="w-2.5 h-2.5 rounded-full bg-taupe-400/60"></span>
-          <span className="w-2.5 h-2.5 rounded-full bg-taupe-300/60"></span>
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/60"></span>
         </div>
-        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-cream-50/70 border border-taupe-200/60 text-[10px] font-mono text-charcoal-500">
+        <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded-md bg-cream-50/80 border border-taupe-200/80 text-[10px] font-mono text-charcoal-600">
           <Code2 className="w-3 h-3 text-mocha-600" />
-          <span>architecture.io</span>
+          <span>{type === 'todo' ? 'app.todo.dev' : 'maintenance.sys'}</span>
         </div>
       </div>
 
-      {/* Center abstract schematic based on type */}
-      <div className="relative my-auto flex items-center justify-center py-2">
-        {type === 'ai' && (
-          <div className="relative flex flex-col items-center justify-center">
-            {/* Neural network nodes visualization */}
-            <div className="flex items-center gap-6 sm:gap-8">
-              <div className="flex flex-col gap-2">
-                <span className="w-3.5 h-3.5 rounded-full bg-mocha-500 ring-4 ring-mocha-200/70 animate-pulse"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-taupe-500 ring-2 ring-taupe-200"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-mocha-600 ring-2 ring-mocha-200"></span>
+      {/* Visual content based on project type */}
+      <div className="relative my-auto py-2">
+        {type === 'todo' && (
+          <div className="w-full max-w-[310px] mx-auto bg-cream-50/95 rounded-xl shadow-soft border border-taupe-200/90 p-3 space-y-2">
+            {/* Header / Stats row */}
+            <div className="flex items-center justify-between pb-1.5 border-b border-taupe-200/60 text-[10px]">
+              <div className="flex items-center gap-1.5 font-bold text-charcoal-800">
+                <CheckSquare className="w-3.5 h-3.5 text-mocha-700" />
+                <span>Mes Tâches Personnelles</span>
               </div>
-              <div className="flex flex-col items-center justify-center p-3 rounded-2xl bg-cream-50/90 shadow-soft border border-mocha-200/80">
-                <BrainCircuit className="w-8 h-8 text-mocha-700" />
-                <span className="mt-1 text-[10px] font-mono font-semibold text-charcoal-700">ML_MODEL</span>
-              </div>
-              <div className="flex flex-col gap-2">
-                <span className="w-3.5 h-3.5 rounded-full bg-mocha-700 ring-2 ring-mocha-200"></span>
-                <span className="w-3.5 h-3.5 rounded-full bg-emerald-600 ring-4 ring-emerald-200/70 animate-pulse"></span>
-              </div>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 font-semibold text-[9px]">
+                84% Réalisées
+              </span>
             </div>
-            <div className="mt-3 flex items-center gap-2 text-[11px] font-mono text-mocha-800 bg-mocha-100/80 px-2.5 py-0.5 rounded-full">
-              <span>accuracy: 94.8%</span>
-              <span className="text-mocha-400">•</span>
-              <span>loss: 0.042</span>
+
+            {/* Task Items */}
+            <div className="space-y-1.5">
+              <div className="flex items-center justify-between p-1.5 rounded-lg bg-white border border-taupe-100 shadow-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 rounded bg-emerald-600 flex items-center justify-center text-white">
+                    <CheckCircle2 className="w-3 h-3" />
+                  </div>
+                  <span className="text-[11px] font-medium text-charcoal-700 line-through opacity-70">
+                    Conception architecture backend
+                  </span>
+                </div>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-taupe-100 text-charcoal-600 font-medium">
+                  Terminé
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between p-1.5 rounded-lg bg-white border border-mocha-200 shadow-xs">
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 rounded border border-mocha-400 bg-mocha-50"></div>
+                  <span className="text-[11px] font-medium text-charcoal-900">
+                    Authentification JWT & Vue Calendrier
+                  </span>
+                </div>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-800 font-medium">
+                  En cours
+                </span>
+              </div>
+
+              <div className="flex items-center justify-between p-1.5 rounded-lg bg-white border border-taupe-100 opacity-80">
+                <div className="flex items-center gap-2">
+                  <div className="w-3.5 h-3.5 rounded border border-taupe-300"></div>
+                  <span className="text-[11px] font-medium text-charcoal-600">
+                    Tableau de bord de statistiques
+                  </span>
+                </div>
+                <span className="text-[9px] px-1.5 py-0.5 rounded bg-mocha-100 text-mocha-800 font-medium">
+                  Priorité haute
+                </span>
+              </div>
             </div>
           </div>
         )}
 
-        {type === 'web' && (
-          <div className="w-full max-w-[260px] bg-cream-50/90 rounded-lg shadow-soft border border-taupe-200/90 p-2.5 space-y-2">
-            <div className="flex items-center justify-between pb-1.5 border-b border-taupe-100">
-              <div className="h-2 w-16 bg-mocha-300 rounded"></div>
-              <div className="h-2 w-8 bg-taupe-200 rounded"></div>
-            </div>
-            <div className="grid grid-cols-3 gap-1.5">
-              <div className="h-10 bg-mocha-100/60 rounded border border-mocha-200/50 flex items-center justify-center">
-                <Layout className="w-4 h-4 text-mocha-600" />
+        {type === 'maintenance' && (
+          <div className="w-full max-w-[310px] mx-auto bg-cream-50/95 rounded-xl shadow-soft border border-taupe-200/90 p-3 space-y-2">
+            {/* Maintenance header */}
+            <div className="flex items-center justify-between pb-1.5 border-b border-taupe-200/60 text-[10px]">
+              <div className="flex items-center gap-1.5 font-bold text-charcoal-800">
+                <Wrench className="w-3.5 h-3.5 text-mocha-700" />
+                <span>Système GMAO & Équipements</span>
               </div>
-              <div className="h-10 bg-taupe-100/60 rounded border border-taupe-200/50 col-span-2 p-1.5 space-y-1">
-                <div className="h-1.5 w-12 bg-charcoal-400/40 rounded"></div>
-                <div className="h-1.5 w-full bg-charcoal-200 rounded"></div>
+              <div className="flex items-center gap-1">
+                <ShieldCheck className="w-3 h-3 text-emerald-600" />
+                <span className="text-[9px] font-semibold text-charcoal-600">Rôles RBAC</span>
               </div>
             </div>
-            <div className="flex justify-between items-center pt-1 text-[9px] font-mono text-charcoal-400">
-              <span>Vite + React Core</span>
-              <span className="text-emerald-600 font-semibold">Ready</span>
+
+            {/* Roles pill */}
+            <div className="flex items-center gap-1.5 text-[9px] text-charcoal-600 py-0.5">
+              <span className="px-1.5 py-0.5 rounded bg-mocha-100 text-mocha-900 font-semibold">Admin</span>
+              <span className="text-taupe-400">•</span>
+              <span className="px-1.5 py-0.5 rounded bg-taupe-100 text-charcoal-800 font-medium">Responsable</span>
+              <span className="text-taupe-400">•</span>
+              <span className="px-1.5 py-0.5 rounded bg-taupe-100 text-charcoal-800 font-medium">Technicien</span>
+            </div>
+
+            {/* Equipment status card */}
+            <div className="grid grid-cols-2 gap-1.5 pt-0.5">
+              <div className="p-2 rounded-lg bg-white border border-taupe-200/80 shadow-xs">
+                <span className="text-[9px] font-mono text-charcoal-500 block">Équipement #EQ-42</span>
+                <span className="text-[10px] font-bold text-charcoal-900">Moteur Industriel A</span>
+                <span className="mt-1 inline-flex items-center gap-1 text-[9px] text-emerald-700 font-medium">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Opérationnel
+                </span>
+              </div>
+
+              <div className="p-2 rounded-lg bg-white border border-amber-200 shadow-xs">
+                <span className="text-[9px] font-mono text-charcoal-500 block">Panne déclarée</span>
+                <span className="text-[10px] font-bold text-charcoal-900">Intervention requise</span>
+                <span className="mt-1 inline-flex items-center gap-1 text-[9px] text-amber-700 font-medium">
+                  <AlertTriangle className="w-2.5 h-2.5" />
+                  Pièces en stock : 12
+                </span>
+              </div>
             </div>
           </div>
         )}
 
-        {type === 'software' && (
-          <div className="w-full max-w-[270px] bg-cream-50/90 rounded-lg shadow-soft border border-taupe-200/90 p-2.5 space-y-2">
+        {type !== 'todo' && type !== 'maintenance' && (
+          <div className="w-full max-w-[270px] mx-auto bg-cream-50/90 rounded-lg shadow-soft border border-taupe-200/90 p-2.5 space-y-2">
             <div className="flex items-center gap-2 text-[11px] font-mono text-charcoal-700 bg-taupe-100/70 px-2 py-1 rounded">
-              <Terminal className="w-3.5 h-3.5 text-mocha-700" />
-              <span>Modular Architecture Suite</span>
-            </div>
-            <div className="flex items-center justify-around py-1">
-              <div className="flex flex-col items-center">
-                <Database className="w-4 h-4 text-mocha-600 mb-0.5" />
-                <span className="text-[9px] font-mono text-charcoal-600">Storage</span>
-              </div>
-              <div className="text-taupe-400 text-xs">⟷</div>
-              <div className="flex flex-col items-center">
-                <Layers className="w-4 h-4 text-mocha-700 mb-0.5" />
-                <span className="text-[9px] font-mono text-charcoal-600">Services</span>
-              </div>
-              <div className="text-taupe-400 text-xs">⟷</div>
-              <div className="flex flex-col items-center">
-                <Cpu className="w-4 h-4 text-mocha-800 mb-0.5" />
-                <span className="text-[9px] font-mono text-charcoal-600">Client</span>
-              </div>
+              <Layers className="w-3.5 h-3.5 text-mocha-700" />
+              <span>Full-Stack Application</span>
             </div>
           </div>
         )}
@@ -111,10 +161,10 @@ export const ProjectMockup = ({ type = 'web', imageUrl, title }) => {
       {/* Bottom ambient highlight */}
       <div className="flex items-center justify-between text-[11px] text-charcoal-500 font-medium pt-1">
         <span className="uppercase tracking-wider text-[10px] text-mocha-700 font-semibold font-mono">
-          {type === 'ai' ? 'Python / Model Inference' : type === 'web' ? 'Frontend / Interactive UI' : 'Software / System Architecture'}
+          {type === 'todo' ? 'React • Node.js • Express • MongoDB' : 'GMAO • RBAC • Interventions • Stock'}
         </span>
         <span className="text-taupe-400">•</span>
-        <span className="text-charcoal-600 text-[10px] font-mono">Production Ready</span>
+        <span className="text-charcoal-600 text-[10px] font-mono font-medium">Full-Stack MERN</span>
       </div>
     </div>
   );

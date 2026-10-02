@@ -5,20 +5,12 @@ import {
   MapPin, 
   Calendar, 
   Code, 
-  Layers, 
-  BrainCircuit, 
-  Smartphone, 
-  Database, 
-  GitBranch, 
-  FileText, 
   CheckCircle2, 
-  Compass 
+  Compass,
+  Sparkles
 } from 'lucide-react';
-import { Github, Linkedin } from '../UI/Icons';
 import { profileData } from '../../data/profile';
 import { SectionHeading } from '../UI/SectionHeading';
-import { Button } from '../UI/Button';
-import { Badge } from '../UI/Badge';
 
 export const About = () => {
   return (
@@ -27,13 +19,13 @@ export const About = () => {
         
         <SectionHeading
           badge="À propos de moi"
-          title="Ingénierie logicielle & Vision multi-domaines"
-          subtitle="Au-delà du simple développement web, je conçois des solutions logicielles complètes, pérennes et orientées vers la résolution de défis concrets."
+          title="Développeuse logicielle polyvalente"
+          subtitle="Rigueur d'ingénierie, curiosité technique & proactivité"
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Bio cards & Key Details */}
+          {/* Left Column: Bio & Key Details */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -62,84 +54,62 @@ export const About = () => {
                   <p key={index}>{paragraph}</p>
                 ))}
               </div>
-
-              {/* Action row inside card */}
-              <div className="mt-6 pt-6 border-t border-taupe-200/80 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex items-center gap-2">
-                  <a
-                    href={profileData.socialLinks.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-taupe-100 text-charcoal-800 hover:bg-taupe-200 transition-colors"
-                  >
-                    <Github className="w-3.5 h-3.5" />
-                    <span>GitHub</span>
-                  </a>
-                  <a
-                    href={profileData.socialLinks.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold bg-taupe-100 text-charcoal-800 hover:bg-taupe-200 transition-colors"
-                  >
-                    <Linkedin className="w-3.5 h-3.5" />
-                    <span>LinkedIn</span>
-                  </a>
-                </div>
-
-                <Button
-                  href={profileData.socialLinks.cvUrl}
-                  target="_blank"
-                  variant="outline"
-                  size="sm"
-                  icon={FileText}
-                >
-                  Télécharger mon CV complet
-                </Button>
-              </div>
             </div>
 
-            {/* Practical information grid */}
+            {/* 4 Practical information cards */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {/* Carte Formation */}
               <div className="glass-card rounded-xl p-4 sm:p-5 flex items-start gap-3.5 border border-taupe-200 shadow-xs">
-                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5">
+                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5 shrink-0">
                   <GraduationCap className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">Formation</span>
-                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">Élève Ingénieur Génie Logiciel</p>
-                  <p className="text-xs text-charcoal-600">Dernière année (PFE en vue)</p>
+                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">
+                    Licence en Développement des Systèmes d’Information
+                  </p>
+                  <p className="text-xs text-mocha-700 font-medium">Formation en cours</p>
                 </div>
               </div>
 
+              {/* Carte Disponibilité */}
               <div className="glass-card rounded-xl p-4 sm:p-5 flex items-start gap-3.5 border border-taupe-200 shadow-xs">
-                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5">
+                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5 shrink-0">
                   <Calendar className="w-5 h-5" />
                 </div>
                 <div>
                   <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">Disponibilité</span>
-                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">Stage PFE 2026</p>
-                  <p className="text-xs text-charcoal-600">Février / Mars (4 à 6 mois)</p>
+                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">
+                    Ouverte aux opportunités
+                  </p>
+                  <p className="text-xs text-charcoal-600">Projets & collaborations</p>
                 </div>
               </div>
 
+              {/* Carte Localisation */}
               <div className="glass-card rounded-xl p-4 sm:p-5 flex items-start gap-3.5 border border-taupe-200 shadow-xs">
-                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5">
+                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5 shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
-                  <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">Localisation & Mobilité</span>
-                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">Tunisie</p>
-                  <p className="text-xs text-charcoal-600">Mobile : France & International</p>
+                  <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">Localisation</span>
+                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">
+                    Tunisie
+                  </p>
+                  <p className="text-xs text-charcoal-600">Mahdia, Tunisie</p>
                 </div>
               </div>
 
+              {/* Carte Positionnement */}
               <div className="glass-card rounded-xl p-4 sm:p-5 flex items-start gap-3.5 border border-taupe-200 shadow-xs">
-                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5">
+                <div className="p-2 rounded-lg bg-mocha-100 text-mocha-800 mt-0.5 shrink-0">
                   <CheckCircle2 className="w-5 h-5 text-emerald-600" />
                 </div>
                 <div>
                   <span className="text-xs font-semibold text-charcoal-500 uppercase tracking-wider">Positionnement</span>
-                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">Software Developer</p>
+                  <p className="text-sm font-bold text-charcoal-900 mt-0.5">
+                    Software Developer
+                  </p>
                   <p className="text-xs text-charcoal-600">Conception, Web, Mobile, Data & IA</p>
                 </div>
               </div>
@@ -147,7 +117,7 @@ export const About = () => {
 
           </motion.div>
 
-          {/* Right Column: Visual Domain Breakdown Cards */}
+          {/* Right Column: Piliers d'intervention logicielle */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -159,9 +129,6 @@ export const About = () => {
               <h3 className="text-lg font-bold tracking-tight text-cream-50">
                 Piliers d'intervention logicielle
               </h3>
-              <p className="text-xs sm:text-sm text-taupe-200 mt-1">
-                Une approche transverse et rigoureuse du cycle de vie des applications :
-              </p>
 
               <div className="mt-5 space-y-3">
                 {profileData.domains.map((domain, idx) => (

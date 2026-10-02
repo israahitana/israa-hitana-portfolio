@@ -7,10 +7,14 @@ import { Projects } from './components/Projects/Projects';
 import { Experience } from './components/Experience/Experience';
 import { Contact } from './components/Contact/Contact';
 import { Footer } from './components/Footer/Footer';
+import { CodeBackground } from './components/UI/CodeBackground';
 
 export function App() {
   return (
-    <div className="relative min-h-screen bg-cream-50 text-charcoal-900 selection:bg-mocha-200 selection:text-mocha-900">
+    <div className="relative min-h-screen bg-cream-50 text-charcoal-900 selection:bg-mocha-200 selection:text-mocha-900 overflow-x-hidden">
+      {/* Background animé subtil inspiré du développement logiciel */}
+      <CodeBackground />
+
       {/* Top Navbar */}
       <Navbar />
 

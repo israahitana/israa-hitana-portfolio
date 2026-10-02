@@ -118,13 +118,13 @@ export const Contact = () => {
         
         <SectionHeading
           badge="Contact & Opportunités"
-          title="Échangeons sur votre projet ou votre opportunité de stage"
-          subtitle="Ouverte aux opportunités de stage PFE en Tunisie, en France et à l'international, ainsi qu'aux discussions techniques et collaborations logicielles."
+          title="Échangeons sur votre projet ou votre opportunité"
+          subtitle="Ouverte aux opportunités professionnelles, aux projets collaboratifs et aux échanges autour du développement logiciel et des technologies numériques."
         />
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
-          {/* Left Column: Direct coordinates & PFE Status */}
+          {/* Left Column: Direct coordinates & Availability Status */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -136,19 +136,14 @@ export const Contact = () => {
             <div className="glass-card rounded-2xl p-6 border border-taupe-200 shadow-soft">
               <div className="flex items-center gap-2.5 text-xs font-bold text-mocha-800 uppercase tracking-wider mb-2">
                 <Sparkles className="w-4 h-4 text-mocha-600" />
-                <span>Disponibilité PFE Immédiate</span>
+                <span>DISPONIBLE POUR DE NOUVELLES OPPORTUNITÉS</span>
               </div>
               <h3 className="text-xl font-bold text-charcoal-900">
-                Prête pour de nouveaux défis logiciels
+                Disponible pour de nouvelles opportunités
               </h3>
-              <p className="mt-2 text-xs sm:text-sm text-charcoal-600 leading-relaxed">
-                Je suis joignable pour convenir d'un entretien technique, présenter mes réalisations et discuter des missions que nous pourrions accomplir ensemble.
+              <p className="mt-2 text-xs sm:text-sm text-charcoal-600 leading-relaxed font-normal">
+                Je suis disponible pour échanger autour de projets, d'opportunités professionnelles et de collaborations dans le domaine du développement logiciel.
               </p>
-
-              <div className="mt-4 pt-4 border-t border-taupe-200/80 flex items-center gap-2 text-xs text-charcoal-500">
-                <Clock className="w-4 h-4 text-mocha-600" />
-                <span>Réponse garantie sous 24h à 48h</span>
-              </div>
             </div>
 
             {/* Direct Contact Cards */}
@@ -161,9 +156,12 @@ export const Contact = () => {
                   </div>
                   <div>
                     <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">Email</span>
-                    <p className="text-sm font-semibold text-charcoal-900 break-all">
+                    <a
+                      href={`mailto:${profileData.socialLinks.email}`}
+                      className="text-sm font-semibold text-charcoal-900 hover:text-mocha-800 transition-colors break-all block"
+                    >
                       {profileData.socialLinks.email}
-                    </p>
+                    </a>
                   </div>
                 </div>
                 <button
