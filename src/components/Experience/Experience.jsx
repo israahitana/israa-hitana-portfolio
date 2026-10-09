@@ -11,7 +11,7 @@ import { SectionHeading } from '../UI/SectionHeading';
 
 export const Experience = () => {
   return (
-    <section id="experience" className="py-20 md:py-28 relative overflow-hidden bg-cream-50">
+    <section id="experience" className="py-20 md:py-28 relative overflow-hidden">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <SectionHeading

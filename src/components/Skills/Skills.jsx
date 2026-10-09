@@ -29,7 +29,7 @@ export const Skills = () => {
   const [hoveredCategory, setHoveredCategory] = useState(null);
 
   return (
-    <section id="skills" className="py-20 md:py-28 relative overflow-hidden bg-cream-50">
+    <section id="skills" className="py-20 md:py-28 relative overflow-hidden">
       {/* Background soft ambient warm gradient */}
       <div className="absolute top-1/2 right-0 w-96 h-96 bg-taupe-200/30 rounded-full blur-3xl pointer-events-none -z-10"></div>
       <div className="absolute bottom-10 left-0 w-96 h-96 bg-mocha-100/40 rounded-full blur-3xl pointer-events-none -z-10"></div>

@@ -1,150 +1,52 @@
-# Portfolio — Israa Hitana
+# Portfolio
 
-> Portfolio personnel de **Israa Hitana**, Software Developer passionnée par la conception de solutions numériques modernes.
-
-[![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=white&style=flat-square)](https://react.dev)
-[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white&style=flat-square)](https://vitejs.dev)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-06B6D4?logo=tailwindcss&logoColor=white&style=flat-square)](https://tailwindcss.com)
-
----
-
-## Présentation
-
-Portfolio professionnel développé avec **React**, **Vite** et **Tailwind CSS**.  
-Il présente mon parcours académique, mes expériences, mes projets et mes compétences en développement logiciel.
-
-Le design est minimaliste, élégant et entièrement responsive (mobile, tablette, desktop).  
-Il intègre des animations fluides via **Framer Motion**, un arrière-plan animé discret inspiré du code, et un téléchargement direct du CV.
-
----
-
-## À propos
-
-Software Developer basée à **Mahdia, Tunisie**, avec une vision logicielle globale allant de la conception orientée objet et de l'architecture logicielle (Clean Code, Design Patterns, UML) jusqu'à l'implémentation frontend réactive, le développement backend performant, les bases de données et les applications en Data Science & Machine Learning.
-
-Ouverte aux opportunités professionnelles, aux stages et aux projets collaboratifs.
-
----
-
-## Formation
-
-| Diplôme | Établissement | Période |
-|---|---|---|
-| Licence en Développement des Systèmes d'Information | Formation en cours | 2024 / 2027 |
-| Baccalauréat | — | 2023 / 2024 — Mention Assez Bien |
-
----
-
-## Expérience
-
-### Stage / Développement Logiciel — SQLI-SERVICES — Été 2024
-
-Expérience en développement informatique au sein de **SQLI-SERVICES**, société spécialisée dans les solutions web et mobile, le CRM, l'ERP et la cybersécurité.
-
-- Développement d'une application web de gestion des tâches
-- Mise en pratique des technologies Full-Stack (React, Node.js, MongoDB)
-- Utilisation de Git / GitHub pour le versioning
-
----
-
-## Projets
-
-### 🗂 ToDo App
-
-Application web Full-Stack de gestion des tâches personnelles.
-
-- Authentification sécurisée (JWT, Bcrypt)
-- Création, modification, suppression de tâches
-- Suivi des statuts : À faire / En cours / Terminé
-- Gestion des priorités et dates d'échéance
-- Tableau de bord de statistiques
-
-**Stack :** React · Node.js · Express · MongoDB · Mongoose · JWT
-
-🔗 [GitHub](https://github.com/israahitana/todo-app)
-
----
-
-### 🔧 Maintenance App
-
-Application web de gestion de maintenance (GMAO) avec contrôle d'accès basé sur les rôles.
-
-- Gestion des équipements et de l'inventaire technique
-- Déclaration et suivi des pannes
-- Planification des interventions aux techniciens
-- Gestion du stock et des pièces de rechange
-- Rôles : Admin · Responsable · Technicien (RBAC)
-
-**Stack :** React · Node.js · Express.js · MongoDB · Mongoose · JWT · RBAC
-
-🔗 [GitHub](https://github.com/israahitana/maintenance-project)
-
----
+Site portfolio personnel, 100 % frontend (aucun backend), présentant mon profil et mes réalisations.
 
 ## Technologies
 
-### Frontend
-`React` · `Vite` · `Tailwind CSS` · `Framer Motion` · `Lucide React`
+- React 19
+- Vite
+- Tailwind CSS
+- Framer Motion
+- Lucide React
+- EmailJS (`@emailjs/browser`) pour le formulaire de contact
 
-### Backend
-`Node.js` · `Express.js` · `MongoDB` · `Mongoose` · `JWT` · `RBAC`
+## Prérequis
 
-### Autres langages & frameworks (en cours / à venir)
-`Java` / `Spring Boot` · `C#` / `.NET` · `Android natif` · `Cloud / DevOps`
+- Node.js 18 ou supérieur
+- npm
 
-### Data & IA
-`Python` · `Data Science` · `Machine Learning`
-
-### Outils
-`Git` · `GitHub` · `VS Code` · `Docker`
-
----
-
-## Lancer le projet en local
-
-### Prérequis
-
-- Node.js ≥ 18
-- npm ≥ 9
-
-### Installation
+## Installation et lancement local
 
 ```bash
-# Cloner le dépôt
-git clone https://github.com/israahitana/israa-hitana-portfolio.git
-cd israa-hitana-portfolio
-
-# Installer les dépendances
 npm install
-
-# Lancer en développement
+cp .env.example .env   # puis renseigner les variables (voir ci-dessous)
 npm run dev
 ```
 
-### Build de production
+## Build
 
 ```bash
 npm run build
 ```
 
-### Ajouter son CV
+Le résultat est généré dans `dist/` (`npm run preview` pour le tester localement).
 
-Placer le fichier PDF dans `public/` sous le nom `CV-Israa-Hitana.pdf`.  
-Le bouton de téléchargement est automatiquement lié à `/CV-Israa-Hitana.pdf`.
+## Déploiement sur Vercel
 
----
+1. Importer le dépôt GitHub dans Vercel (« Add New Project »).
+2. Vercel détecte Vite automatiquement : commande de build `npm run build`, dossier de sortie `dist`.
+3. Ajouter les variables d'environnement du formulaire (Settings → Environment Variables), puis déployer.
+4. Toute modification d'une variable nécessite un nouveau déploiement.
 
-## Contact
+## Formulaire de contact
 
-| Canal | Lien |
-|---|---|
-| 📧 Email | [hitanaisraa8@gmail.com](mailto:hitanaisraa8@gmail.com) |
-| 💼 LinkedIn | [linkedin.com/in/israahitana](https://linkedin.com/in/israahitana) |
-| 🐙 GitHub | [github.com/israahitana](https://github.com/israahitana) |
-| 📍 Localisation | Mahdia, Tunisie |
+Le formulaire envoie les messages via [EmailJS](https://www.emailjs.com), sans serveur. Variables requises (voir `.env.example`) :
 
----
+| Variable | Où la trouver |
+| --- | --- |
+| `VITE_EMAILJS_SERVICE_ID` | EmailJS → Email Services |
+| `VITE_EMAILJS_TEMPLATE_ID` | EmailJS → Email Templates |
+| `VITE_EMAILJS_PUBLIC_KEY` | EmailJS → Account → General |
 
-<p align="center">
-  Conçu et développé par <strong>Israa Hitana</strong> · 2024
-</p>
+Dans le modèle d'email, utiliser les paramètres `{{from_name}}`, `{{from_email}}`, `{{subject}}` et `{{message}}`, définir le champ « To Email » sur l'adresse de réception et « Reply To » sur `{{reply_to}}`.

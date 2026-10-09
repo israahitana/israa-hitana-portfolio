@@ -11,7 +11,7 @@ import { CodeBackground } from './components/UI/CodeBackground';
 
 export function App() {
   return (
-    <div className="relative min-h-screen bg-cream-50 text-charcoal-900 selection:bg-mocha-200 selection:text-mocha-900 overflow-x-hidden">
+    <div className="relative isolate min-h-screen bg-cream-50 text-charcoal-900 selection:bg-mocha-200 selection:text-mocha-900 overflow-x-hidden">
       {/* Background animé subtil inspiré du développement logiciel */}
       <CodeBackground />
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import emailjs from '@emailjs/browser';
 import { 
   Mail, 
   MapPin, 
@@ -16,6 +17,11 @@ import { Github, Linkedin } from '../UI/Icons';
 import { profileData } from '../../data/profile';
 import { SectionHeading } from '../UI/SectionHeading';
 import { Button } from '../UI/Button';
+
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 export const Contact = () => {
   const [formData, setFormData] = useState({
@@ -46,69 +52,53 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (status.submitting) return;
 
-    // Simple validation
-    if (!formData.name || !formData.email || !formData.message) {
+    const name = formData.name.trim();
+    const email = formData.email.trim();
+    const subject = formData.subject.trim();
+    const message = formData.message.trim();
+
+    if (!name || !email || !message) {
+      setStatus({ submitting: false, submitted: false, error: 'Veuillez renseigner tous les champs obligatoires.' });
+      return;
+    }
+    if (!EMAIL_REGEX.test(email)) {
+      setStatus({ submitting: false, submitted: false, error: "Veuillez saisir une adresse email valide." });
+      return;
+    }
+    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
       setStatus({
         submitting: false,
         submitted: false,
-        error: 'Veuillez renseigner tous les champs obligatoires.',
+        error: "Le formulaire n'est pas encore configuré. Vous pouvez m'écrire directement par email.",
       });
       return;
     }
 
     setStatus({ submitting: true, submitted: false, error: null });
 
-    const endpoint = import.meta.env.VITE_CONTACT_FORM_ENDPOINT;
-
-    if (endpoint) {
-      try {
-        const response = await fetch(endpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Accept: 'application/json',
-          },
-          body: JSON.stringify({
-            name: formData.name,
-            email: formData.email,
-            subject: formData.subject || 'Nouveau message depuis le portfolio',
-            message: formData.message,
-          }),
-        });
-
-        if (response.ok) {
-          setStatus({ submitting: false, submitted: true, error: null });
-          setFormData({ name: '', email: '', subject: '', message: '' });
-        } else {
-          throw new Error("Erreur lors de l'envoi du message.");
-        }
-      } catch (err) {
-        setStatus({
-          submitting: false,
-          submitted: false,
-          error: "Une erreur est survenue lors de l'envoi. Vous pouvez également m'envoyer un email directement.",
-        });
-      }
-    } else {
-      // Si aucun endpoint externe n'est encore configuré dans .env,
-      // on prépare un mailto pré-rempli et on affiche le retour positif immédiat
-      setTimeout(() => {
-        const mailtoUrl = `mailto:${profileData.socialLinks.email}?subject=${encodeURIComponent(
-          formData.subject || 'Prise de contact - Portfolio'
-        )}&body=${encodeURIComponent(
-          `Nom: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-        )}`;
-        
-        window.open(mailtoUrl, '_blank');
-
-        setStatus({
-          submitting: false,
-          submitted: true,
-          error: null,
-        });
-        setFormData({ name: '', email: '', subject: '', message: '' });
-      }, 600);
+    try {
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          from_name: name,
+          from_email: email,
+          reply_to: email,
+          subject: subject || 'Nouveau message depuis le portfolio',
+          message,
+        },
+        { publicKey: EMAILJS_PUBLIC_KEY }
+      );
+      setStatus({ submitting: false, submitted: true, error: null });
+      setFormData({ name: '', email: '', subject: '', message: '' });
+    } catch {
+      setStatus({
+        submitting: false,
+        submitted: false,
+        error: "L'envoi a échoué. Veuillez réessayer dans un instant ou m'écrire directement par email.",
+      });
     }
   };
 
@@ -252,7 +242,7 @@ export const Contact = () => {
                 <div className="mb-6 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold">Message transmis avec succès !</h4>
+                    <h4 className="text-sm font-bold">Message envoyé avec succès !</h4>
                     <p className="text-xs text-emerald-800 mt-1">
                       Merci pour votre prise de contact. Je vous répondrai très prochainement.
                     </p>
@@ -264,13 +254,13 @@ export const Contact = () => {
                 <div className="mb-6 p-4 rounded-xl bg-amber-50 border border-amber-200 text-amber-900 flex items-start gap-3">
                   <AlertCircle className="w-5 h-5 text-amber-600 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="text-sm font-bold">Information</h4>
+                    <h4 className="text-sm font-bold">Envoi impossible</h4>
                     <p className="text-xs text-amber-800 mt-1">{status.error}</p>
                   </div>
                 </div>
               )}
 
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {/* Name Input */}
                   <div>
