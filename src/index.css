@@ -98,3 +98,28 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Arrière-plan : animations très lentes, transform/opacity uniquement */
+.code-bg-halo { will-change: transform; animation: code-bg-drift 48s ease-in-out infinite alternate; }
+.code-bg-halo-b { animation-duration: 60s; animation-direction: alternate-reverse; }
+.code-bg-halo-c { animation-duration: 54s; }
+.code-bg-wave { animation: code-bg-sway 40s ease-in-out infinite alternate; }
+.code-bg-wave-b { animation-duration: 52s; animation-direction: alternate-reverse; }
+.code-bg-wave-c { animation-duration: 64s; }
+.code-bg-detail { opacity: 0.1; animation: code-bg-breathe 30s ease-in-out infinite; }
+@keyframes code-bg-drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(50px, 36px, 0) scale(1.08); }
+}
+@keyframes code-bg-sway {
+  from { transform: translate3d(-24px, 0, 0); }
+  to { transform: translate3d(24px, 14px, 0); }
+}
+@keyframes code-bg-breathe {
+  0%, 100% { opacity: 0.06; }
+  50% { opacity: 0.2; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .code-bg-halo, .code-bg-wave, .code-bg-detail { animation: none !important; }
+  .code-bg-detail { opacity: 0.1; }
+}
