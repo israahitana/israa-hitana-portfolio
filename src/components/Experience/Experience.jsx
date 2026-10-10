@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { 
   GraduationCap, 
   Briefcase, 
+  Award,
   MapPin, 
   Calendar
 } from 'lucide-react';
@@ -23,6 +24,7 @@ export const Experience = () => {
         <div className="relative mt-12 pl-6 sm:pl-10 border-l-2 border-taupe-300 space-y-10">
           {timelineData.map((item, index) => {
             const isEducation = item.type === 'education';
+            const isCertification = item.type === 'certification';
 
             return (
               <motion.div
@@ -43,7 +45,9 @@ export const Experience = () => {
                       : 'bg-charcoal-700 text-cream-50 group-hover:bg-mocha-700'
                   }`}
                 >
-                  {isEducation ? (
+                  {isCertification ? (
+                    <Award className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+                  ) : isEducation ? (
                     <GraduationCap className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                   ) : (
                     <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
@@ -63,12 +67,12 @@ export const Experience = () => {
                     <div className="flex items-center gap-2">
                       <span
                         className={`text-xs font-semibold px-2.5 py-0.5 rounded-full ${
-                          isEducation
+                          isEducation || isCertification
                             ? 'bg-taupe-200 text-charcoal-800'
                             : 'bg-mocha-100 text-mocha-900 border border-mocha-200/80'
                         }`}
                       >
-                        {isEducation ? 'Formation Académique' : 'Expérience / Projet'}
+                        {isCertification ? 'Certification' : isEducation ? 'Formation Académique' : 'Expérience / Stage'}
                       </span>
                     </div>
 
@@ -77,6 +81,12 @@ export const Experience = () => {
                       <span>{item.period}</span>
                     </div>
                   </div>
+
+                  {item.status && (
+                    <span className="inline-block mt-1 text-xs font-semibold px-2.5 py-0.5 rounded-full bg-mocha-700 text-cream-50">
+                      {item.status}
+                    </span>
+                  )}
 
                   {/* Role & Institution */}
                   <h3 className="text-lg sm:text-xl font-bold text-charcoal-900 mt-1">

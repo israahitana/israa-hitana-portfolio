@@ -98,36 +98,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-/* Arrière-plan code : animations légères (transform/opacity uniquement) */
-.code-bg-float {
-  opacity: 0;
-  will-change: transform, opacity;
-  animation: code-bg-float 24s ease-in-out infinite;
-}
-.code-bg-dot {
-  opacity: 0;
-  animation: code-bg-dot 14s ease-in-out infinite;
-}
-.code-bg-link {
-  opacity: 0;
-  animation: code-bg-link 16s ease-in-out infinite;
-}
-@keyframes code-bg-float {
-  0%, 100% { opacity: 0; transform: translate3d(0, 0, 0); }
-  25%, 75% { opacity: 0.22; }
-  50% { opacity: 0.26; transform: translate3d(8px, -18px, 0); }
-}
-@keyframes code-bg-dot {
-  0%, 100% { opacity: 0.1; transform: translateY(0) scale(0.9); }
-  50% { opacity: 0.4; transform: translateY(-10px) scale(1.2); }
-}
-@keyframes code-bg-link {
-  0%, 100% { opacity: 0; }
-  50% { opacity: 0.35; }
-}
-@media (prefers-reduced-motion: reduce) {
-  .code-bg-float { animation: none; opacity: 0.12; }
-  .code-bg-dot { animation: none; opacity: 0.2; }
-  .code-bg-link { animation: none; opacity: 0.15; }
-}

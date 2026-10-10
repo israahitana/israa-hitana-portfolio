@@ -178,7 +178,7 @@ export const Contact = () => {
                   <div>
                     <span className="text-[11px] font-semibold text-charcoal-400 uppercase tracking-wider">LinkedIn</span>
                     <p className="text-sm font-semibold text-charcoal-900 group-hover:text-mocha-800 transition-colors">
-                      in/israahitana
+                      in/israa-hitana-28a041339
                     </p>
                   </div>
                 </div>

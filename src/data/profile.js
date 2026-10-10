@@ -52,9 +52,9 @@ export const profileData = {
 
   socialLinks: {
     github: "https://github.com/israahitana",
-    linkedin: "https://linkedin.com/in/israahitana",
+    linkedin: "https://www.linkedin.com/in/israa-hitana-28a041339",
     email: "hitanaisraa8@gmail.com",
-    // Placer le fichier PDF ici : /public/CV-Israa-Hitana.pdf
+    // CV : public/CV-Israa-Hitana.pdf
     cvUrl: "/CV-Israa-Hitana.pdf",
   },
 };
